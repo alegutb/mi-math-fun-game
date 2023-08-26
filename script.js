@@ -1,10 +1,30 @@
 function generateEquation() {
     // Generate different equation types with varying coefficients, constants, and results
-    const equationTypes = [
-      { equation: `2x + 5 = 15`, coefficient: 2, constant: 5, result: 15 },
-      { equation: `4x - 10 = 18`, coefficient: 4, constant: -10, result: 18 },
-      { equation: `5x + 3 = 23`, coefficient: 5, constant: 3, result: 23 }
-      // Add more equation types here
+    
+const difficulties = [
+    { name: "Easy", equations: [
+        { equation: "2x + 5 = 15", answer: 5 },
+        { equation: "3y - 7 = 10", answer: 17/3 },
+        { equation: "4z + 8 = 28", answer: 5 },
+    ]},
+    { name: "Medium", equations: [
+        { equation: "5a - 12 = 33", answer: 9 },
+        { equation: "6b + 4 = 22", answer: 3 },
+        { equation: "9c - 15 = 51", answer: 8 },
+        { equation: "2d + 3 = 5d - 1", answer: 2 },
+        { equation: "4e + 7 = 2e + 18", answer: 5 },
+    ]},
+    { name: "Hard", equations: [
+        { equation: "2x + 3 = 5x - 1", answer: 2 },
+        { equation: "4y + 7 = 2y + 18", answer: 5 },
+        { equation: "3z + 9 = 2z + 21", answer: 12 },
+        { equation: "7a - 4 = 3a + 12", answer: 8 },
+        { equation: "6b + 5 = 8b - 3", answer: -4 },
+    ]},
+];
+
+      
+        // Add more equation types here
     ];
   
     const randomIndex = Math.floor(Math.random() * equationTypes.length);
