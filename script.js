@@ -111,3 +111,44 @@ function generateEquation() {
   startTimer();
   currentEquation = generateEquation();
   questionElement.textContent = `Solve for x: ${currentEquation.equation}`;
+
+const startGameButton = document.getElementById("startGameButton");
+const startTimerButton = document.getElementById("startTimerButton");
+
+let isGameStarted = false;
+let isTimerStarted = false;
+
+startGameButton.addEventListener("click", () => {
+    if (!isGameStarted) {
+        isGameStarted = true;
+        startGameButton.textContent = "Game Started";
+        startGame();
+    }
+});
+
+startTimerButton.addEventListener("click", () => {
+    if (!isTimerStarted) {
+        isTimerStarted = true;
+        startTimerButton.textContent = "Timer Started";
+        startTimer();
+    }
+});
+
+function startGame() {
+    difficultySelect.disabled = true;
+    displayEquation();
+}
+
+function startTimer() {
+    startTimerButton.disabled = true;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timerElement.textContent = `Time left: ${timeLeft} s`;
+        timeLeft--;
+        if (timeLeft < 0) {
+            clearInterval(timerInterval);
+            showGameOver(false);
+        }
+    }, 1000);
+}
+
