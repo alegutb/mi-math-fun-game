@@ -1,32 +1,32 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const equationElement = document.getElementById("equation");
-    const answerElement = document.getElementById("answer");
-    const checkButton = document.getElementById("checkButton");
-    const resultElement = document.getElementById("result");
-  
-    // Generate a random equation
-    function generateEquation() {
-      const operators = ["+", "-", "*", "/"];
-      const num1 = Math.floor(Math.random() * 10) + 1;
-      const num2 = Math.floor(Math.random() * 10) + 1;
-      const operator = operators[Math.floor(Math.random() * operators.length)];
-      equationElement.textContent = `${num1} ${operator} ${num2} = ?`;
-      return eval(`${num1} ${operator} ${num2}`);
-    }
-  
-    // Display a new equation when the page loads
-    let correctAnswer = generateEquation();
-  
-    // Check the user's answer
-    checkButton.addEventListener("click", function() {
-      const userAnswer = parseFloat(answerElement.value);
-      if (userAnswer === correctAnswer) {
-        resultElement.textContent = "Correct!";
-        answerElement.value = "";
-        correctAnswer = generateEquation();
-      } else {
-        resultElement.textContent = "Try again!";
-      }
-    });
-  });
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  margin-top: 50px;
+}
+
+.equation {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 50px;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+
+button {
+  font-size: 18px;
+  padding: 8px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
   
