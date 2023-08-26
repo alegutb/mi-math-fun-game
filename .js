@@ -1,32 +1,30 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+const equationElement = document.getElementById('equation');
+const inputElement = document.getElementById('input');
+const checkBtn = document.getElementById('checkBtn');
+
+function generateEquation() {
+  const operators = ['+', '-', '*', '/'];
+  const num1 = Math.floor(Math.random() * 20) + 1;
+  const num2 = Math.floor(Math.random() * 20) + 1;
+  const operator = operators[Math.floor(Math.random() * operators.length)];
+  const equation = `${num1} ${operator} ${num2}`;
+  equationElement.textContent = equation;
 }
 
-.game-container {
-  margin-top: 50px;
-}
-
-.equation {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-input {
-  width: 50px;
-  font-size: 18px;
-  text-align: center;
-  padding: 5px;
-}
-
-button {
-  font-size: 18px;
-  padding: 8px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+checkBtn.addEventListener('click', () => {
+  const userAnswer = inputElement.value;
+  const equation = equationElement.textContent;
+  const correctAnswer = eval(equation).toString();
   
+  if (userAnswer === correctAnswer) {
+    alert('Correct! Well done.');
+  } else {
+    alert('Incorrect. Try again.');
+  }
+  
+  generateEquation();
+  inputElement.value = '';
+});
+
+// Initial setup
+generateEquation();
