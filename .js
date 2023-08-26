@@ -1,57 +1,41 @@
-const problemElement = document.getElementById("problem");
-const userAnswerInput = document.getElementById("userAnswer");
-const submitBtn = document.getElementById("submitBtn");
-const resultElement = document.getElementById("result");
-const timeElement = document.getElementById("time");
+// ... (previous code)
 
-let timer;
-let timeLeft = 60;
+const scoreElement = document.getElementById('score');
+const nextButton = document.getElementById('nextButton');
 
-function generateProblem() {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    const operators = ["+", "-", "*", "/"];
-    const operator = operators[Math.floor(Math.random() * operators.length)];
-    
-    problemElement.textContent = `${num1} ${operator} ${num2}`;
-    
-    return eval(`${num1} ${operator} ${num2}`);
-}
+let score = 0;
+updateScore();
 
-function startTimer() {
-    timer = setInterval(function() {
-        timeLeft--;
-        timeElement.textContent = `${timeLeft} seconds`;
-
-        if (timeLeft === 0) {
-            clearInterval(timer);
-            submitBtn.disabled = true;
-            resultElement.textContent = "Time's up!";
-        }
-    }, 1000);
-}
-
-function checkAnswer() {
-    const correctAnswer = generateProblem();
-    const userAnswer = parseFloat(userAnswerInput.value);
-    
-    if (userAnswer === correctAnswer) {
-        resultElement.textContent = "Correct!";
+checkButton.addEventListener('click', () => {
+  const userAnswer = parseFloat(answerElement.value);
+  if (!isNaN(userAnswer)) {
+    if (userAnswer === currentEquation.xValue) {
+      resultElement.textContent = 'Correct! Well done.';
+      score += 10;
     } else {
-        resultElement.textContent = "Incorrect!";
+      resultElement.textContent = `Incorrect. The correct answer is ${currentEquation.xValue}.`;
     }
     
-    userAnswerInput.value = "";
+    answerElement.disabled = true;
+    checkButton.disabled = true;
+    nextButton.style.display = 'block';
+
+    updateScore();
+  } else {
+    resultElement.textContent = 'Please enter a valid number.';
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  currentEquation = generateEquation();
+  questionElement.textContent = `Solve for x: ${currentEquation.equation}`;
+  answerElement.value = '';
+  resultElement.textContent = '';
+  answerElement.disabled = false;
+  checkButton.disabled = false;
+  nextButton.style.display = 'none';
+});
+
+function updateScore() {
+  scoreElement.textContent = score;
 }
-
-submitBtn.addEventListener("click", function() {
-    checkAnswer();
-});
-
-userAnswerInput.addEventListener("keyup", function(event) {
-    if (event.key === "Enter") {
-        checkAnswer();
-    }
-});
-
-startTimer();
