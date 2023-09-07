@@ -1,3 +1,20 @@
+const questionElement = document.getElementById('question');
+const answerElement = document.getElementById('answer');
+const resultElement = document.getElementById('result');
+const checkButton = document.getElementById('checkButton');
+const nextButton = document.getElementById('nextButton');
+const hintButton = document.getElementById('hintButton');
+const skipButton = document.getElementById('skipButton');
+const timerElement = document.getElementById('timer');
+const scoreElement = document.getElementById('score');
+const newGame = document.getElementById('newGame');
+
+let currentEquation;
+let score = 0;
+let time = 60;
+let timerInterval;
+let hasGameStarted = false;
+
 function generateEquation() {
   // Generate different equation types with varying coefficients, constants, and results
   const equationTypes = [
@@ -17,31 +34,29 @@ function generateEquation() {
   };
 }
 
-const questionElement = document.getElementById('question');
-const answerElement = document.getElementById('answer');
-const resultElement = document.getElementById('result');
-const checkButton = document.getElementById('checkButton');
-const nextButton = document.getElementById('nextButton');
-const hintButton = document.getElementById('hintButton');
-const skipButton = document.getElementById('skipButton');
-const timerElement = document.getElementById('timer');
-const scoreElement = document.getElementById('score');
-
-let currentEquation;
-let score = 0;
-let time = 60;
-let timerInterval;
+function startNewGame() {
+  currentEquation = generateEquation();
+  questionElement.textContent = `Solve for x: ${currentEquation.equation}`;
+  answerElement.disabled = false;
+  startTimer();
+}
 
 function startTimer() {
-  timerInterval = setInterval(() => {
-    if (time > 0) {
-      time--;
-      timerElement.textContent = `Time: ${time} s`;
-    } else {
-      clearInterval(timerInterval);
-      gameOver();
-    }
-  }, 1000);
+  if (!hasGameStarted) {
+    time = 60;
+
+    timerInterval = setInterval(() => {
+      if (time > 0) {
+        time--;
+        timerElement.textContent = `Time: ${time} s`;
+      } else {
+        clearInterval(timerInterval);
+        gameOver();
+      }
+    }, 1000);
+
+    hasGameStarted = true
+  }
 }
 
 function gameOver() {
@@ -51,6 +66,7 @@ function gameOver() {
   nextButton.style.display = 'none';
   hintButton.style.display = 'none';
   skipButton.style.display = 'none';
+  hasGameStarted = false;
 }
 
 function updateScore() {
@@ -66,7 +82,7 @@ checkButton.addEventListener('click', () => {
     } else {
       resultElement.textContent = `Incorrect. The correct answer is ${currentEquation.xValue}.`;
     }
-    
+
     answerElement.disabled = true;
     checkButton.disabled = true;
     nextButton.style.display = 'block';
@@ -108,7 +124,9 @@ skipButton.addEventListener('click', () => {
   skipButton.style.display = 'block';
 });
 
-startTimer();
-currentEquation = generateEquation();
-questionElement.textContent = `Solve for x: ${currentEquation.equation}`;
+newGame.addEventListener('click', () => {
+  startNewGame();
+})
+
+startNewGame();
 

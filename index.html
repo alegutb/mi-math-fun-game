@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Equation Breakdown</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Equation Breakdown</title>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <h1>Equation Breakdown</h1>
     <div class="game-container">
-      <p id="question">Solve for x: 3x + 7 = 22</p>
-      <input type="text" id="answer" placeholder="Enter your answer">
-      <button id="checkButton">Check Answer</button>
-      <p id="result"></p>
-      <button id="nextButton" style="display: none;">Next Equation</button>
+        <p id="question"></p>
+        <input type="text" id="answer" placeholder="Enter your answer">
+        <button id="checkButton">Check Answer</button>
+        <p id="result"></p>
+        <button id="nextButton" style="display: none;">Next Equation</button>
     </div>
     <div class="game-options">
-      <button id="hintButton" style="display: none;">Hint</button>
-      <button id="skipButton" style="display: none;">Skip Equation</button>
-      <p id="timer">Time: <span id="time">60</span> s</p>
-      <p>Score: <span id="score">0</span></p>
+        <button id="hintButton" style="display: none;">Hint</button>
+        <button id="skipButton" style="display: none;">Skip Equation</button>
+        <p id="timer">Time: <span id="time">60</span> s</p>
+        <p>Score: <span id="score">0</span></p>
     </div>
-  </div>
- <script src="main.js"></script>
+    <div>
+        <label for="difficultySelect">Difficulty:</label>
+        <select class="difficulty-select" id="difficultySelect">
+            <option value="0">Easy</option>
+            <option value="1">Medium</option>
+            <option value="2">Hard</option>
+        </select>
+        <button class="button" id="newGame">New Game</button>
+    </div>
+</div>
+<script src="main.js"></script>
 </body>
 </html>
-<div class="container" id="game-container">
-    <!-- ... (existing game container HTML) ... -->
-    <button class="button" id="hintButton">Hint</button>
-    <select class="difficulty-select" id="difficultySelect">
-        <option value="0">Easy</option>
-        <option value="1">Medium</option>
-        <option value="2">Hard</option>
-    </select>
-    <button class="button" id="startGameButton">Start Game</button>
-    <button class="button" id="startTimerButton">Start Timer</button>
-</div>
-
-<div class="game-over-container" id="game-over-container">
-    <!-- Game over content will be inserted using JavaScript -->
-    <button class="button" id="restartButton">Restart</button>
-</div>
 
 
